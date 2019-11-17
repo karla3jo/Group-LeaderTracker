@@ -5,7 +5,7 @@ https://content.iospress.com/articles/journal-of-ambient-intelligence-and-smart-
 This code is open-source and free for anyone to experiment further with it :-) 
 If you publish any work that uses this software or refers to it in any way, please just cite us:
 
-Trejo, K., Angulo, C., Satoh, S. I., & Bono, M. (2018). "Towards robots reasoning about group behavior of museum visitors: Leader detection and group tracking". Journal of Ambient Intelligence and Smart Environments, 10(1), 3-19.
+Trejo, K., Angulo, C., Satoh, S. I., & Bono, M. (2018). Towards robots reasoning about group behavior of museum visitors: Leader detection and group tracking. Journal of Ambient Intelligence and Smart Environments, 10(1), 3-19.
 
 ## Requisites
 - OpenCV libs 2.4.11
