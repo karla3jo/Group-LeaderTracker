@@ -8,7 +8,7 @@ If you publish any work that uses this software or refers to it in any way, plea
 Trejo, K., Angulo, C., Satoh, S. I., & Bono, M. (2018). Towards robots reasoning about group behavior of museum visitors: Leader detection and group tracking. Journal of Ambient Intelligence and Smart Environments, 10(1), 3-19.
 
 ## Requisites
-- OpenCV libs 2.4.11
+- OpenCV 2.4.11
 - Dlib 18.18
 - Visual Studio (C# environment)
 - An input video sequence (.avi file)
