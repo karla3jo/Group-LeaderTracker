@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////
-////			GROUP LEADER DETECTOR AND TRACKER by KARLA TREJO	    ////
+////		    GROUP LEADER DETECTOR AND TRACKER by KARLA TREJO	            ////
 ////										    ////
 ////	National Insitute of Informatics - Universitat Politècnica de Catalunya	    ////
-////		            July, 2016. Tokyo, Japan.				    ////
+////		              July, 2016. Tokyo, Japan.				    ////
 ////										    ////
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -67,36 +67,36 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	cv::Mat img;					//Image
-	cv::Mat cpy_img;				//Copy of Image
-	cv::Mat croppedImage;			//Cropped Image to optimize calculations of Optical Flow
-	int counter_img = 0;			//Number of frames
+	cv::Mat img;			//Image
+	cv::Mat cpy_img;		//Copy of Image
+	cv::Mat croppedImage;		//Cropped Image to optimize calculations of Optical Flow
+	int counter_img = 0;		//Number of frames
 	int distances[5][15] = { 0 };	//Distances matrix, array accumulating Delta values of every detection in the frames (Rows:DiffXY,CoordXY & MemberFlag, Cols:Detections)
-	int matrix[5][15] = { 0 };		//Copy of Distances Matrix to detect unchaged values (False Positives detections) that could be eliminated
-	int mat_i = 0;					//Columns-pointer for Distances Matrix 
-	int value_x = 0;				//Current X value, left coordinate of the bounding box provided by OpenCV's People Detector
-	int compare_x = 0;				//Difference between value_x and a X value stored in Distances Matrix from previous detections
-	int save_loc_2 = 0;				//Crucial location (ID) of a X value
-	int ii = 0;						//Row-pointer for accesing arrays of information
-	int jj = 0;						//Column-pointer for accessing arrays of information
-	int center_x = 0;				//Center X coordinate of leader's location (info required by Dlib's tracker)
-	int center_y = 0;				//Center Y coordinate of leader's location (info required by Dlib's tracker)
-	int leader_width = 0;			//Width of leader's bounding box (info required for Dlib Tracker) and a constant value for ROI's sizes and Optical Flow inputs
-	int leader_height = 0;			//Height of leader's bounding box (info required for Dlib Tracker) and a constant value for ROI's sizes and Optical Flow inputs
-	int d = 0;						//First detection comparisson flag
-	int rem = 0;					//Remainder of the division that triggers several procedures every 25 frames
-	int flag_track = 0;				//Flag to trigger the tracker's update over the frames
-	int rightc[15] = { 0 };			//Vector storing the right corner coordinate from the detection bounding boxes
-	int m = 0;						//Multipurpose variable for counting tasks
-	int thresh = 8;					//Thresholding to filter outrageous sizes coming from possible erroneous coordinates of bounding boxes
+	int matrix[5][15] = { 0 };	//Copy of Distances Matrix to detect unchaged values (False Positives detections) that could be eliminated
+	int mat_i = 0;			//Columns-pointer for Distances Matrix 
+	int value_x = 0;		//Current X value, left coordinate of the bounding box provided by OpenCV's People Detector
+	int compare_x = 0;		//Difference between value_x and a X value stored in Distances Matrix from previous detections
+	int save_loc_2 = 0;		//Crucial location (ID) of a X value
+	int ii = 0;			//Row-pointer for accesing arrays of information
+	int jj = 0;			//Column-pointer for accessing arrays of information
+	int center_x = 0;		//Center X coordinate of leader's location (info required by Dlib's tracker)
+	int center_y = 0;		//Center Y coordinate of leader's location (info required by Dlib's tracker)
+	int leader_width = 0;		//Width of leader's bounding box (info required for Dlib Tracker) and a constant value for ROI's sizes and Optical Flow inputs
+	int leader_height = 0;		//Height of leader's bounding box (info required for Dlib Tracker) and a constant value for ROI's sizes and Optical Flow inputs
+	int d = 0;			//First detection comparisson flag
+	int rem = 0;			//Remainder of the division that triggers several procedures every 25 frames
+	int flag_track = 0;		//Flag to trigger the tracker's update over the frames
+	int rightc[15] = { 0 };		//Vector storing the right corner coordinate from the detection bounding boxes
+	int m = 0;			//Multipurpose variable for counting tasks
+	int thresh = 8;			//Thresholding to filter outrageous sizes coming from possible erroneous coordinates of bounding boxes
 	float opt_flows[2][1] = { 0 };	//Array computing the sum of optical flows for later average every 25 frames
 	cv::Mat flow, cflow, prevgray;	//Optical flow image arrays
 	cv::Mat prevframe, currframe, nextframe; //Motion detection image arrays
-	int flag_member = 0;			//Flag for setting Membership Values 
-	int id_member = 0;				//Saves position in the array for the current detection
-	int unch = 0;					//Flag to compare Distances Matrix and its copy
-	int flag_forced = 0;			//Flag to know if only the leader is detected in the scene, but the group members are not spoted yet by the People Detector algorithm
-	int flag_true_member = 0;		//Flag to consider if a detection with no motion could be considered as an static group member or as a non-member
+	int flag_member = 0;		//Flag for setting Membership Values 
+	int id_member = 0;		//Saves position in the array for the current detection
+	int unch = 0;			//Flag to compare Distances Matrix and its copy
+	int flag_forced = 0;		//Flag to know if only the leader is detected in the scene, but the group members are not spoted yet by the People Detector algorithm
+	int flag_true_member = 0;	//Flag to consider if a detection with no motion could be considered as an static group member or as a non-member
 
 	// d1 and d2 for calculating the differences
 	// result, the result of and operation, calculated on d1 and d2
@@ -723,8 +723,6 @@ int main(int argc, char* argv[])
 
 			}
 		}
-
-		//rem = counter_img % 25; 
 		
 		//Every 25 frames, we check for any false-positives to erase from the database. False-positives are spoted by identifying NO CHANGES on their coordinates over
 		//25 frames. A detection that remains static is very likely to be an object, and so, a false-positive.
