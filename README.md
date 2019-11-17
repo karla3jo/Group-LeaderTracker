@@ -16,9 +16,9 @@ Trejo, K., Angulo, C., Satoh, S. I., & Bono, M. (2018). Towards robots reasoning
 ## How to use
 Just run the .exe file at *x64/Release* directory from any version (group_leader_traker or exponential_group_leader_traker) in command line as: **chosen_version.exe path_to_your_video_file.avi**
 
-If you want to edit any of the source code, open the desired version of the project in Visual Studio and add the corresponding .prop files and dependencies --for DLib and OpenCV-- to your project path by importing the contents of *libraries* directory.
+If you want to edit any of the source code, open the desired version of the project in Visual Studio and add the corresponding .prop files --for DLib and OpenCV-- to your project path by importing the contents of *libraries* directory.
 
-In case you are willing to prepare ground truth to validate your experiments, just remember to uncomment the corresponding section in the main files of group_leader_traker and exponential_group_leader_traker if you are using our ground_truth_generator. Adapt the frame sampling rate to your own needs.
+In case you are willing to prepare ground truth to validate your experiments, just remember to uncomment the corresponding section in the main files of group_leader_traker and exponential_group_leader_traker. Adapt the frame sampling rate to your own needs.
 
 We cannot provide the image-video datasets from our paper. However, you can still watch the algorithm in action for the Miraikan museum video sequences at https://www.youtube.com/watch?v=gb8dIY-UiTg&t=2s
 
