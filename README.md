@@ -18,7 +18,7 @@ Just run the .exe file at *x64/Release* directory from any version (group_leader
 
 If you want to edit any of the source code, open the desired version of the project in Visual Studio and add the corresponding .prop files and dependencies --for DLib and OpenCV-- to your project path by importing the contents of *libraries* directory.
 
-In case you are willing to generate ground truth to validate your experiments, just remember to uncomment the corresponding section in the main files of group_leader_traker/exponential_group_leader_traker.
+In case you are willing to prepare ground truth to validate your experiments, just remember to uncomment the corresponding section in the main files of group_leader_traker and exponential_group_leader_traker if you are using our ground_truth_generator. Adapt the frame sampling rate to your own needs.
 
 We cannot provide the image-video datasets from our paper. However, you can still watch the algorithm in action for the Miraikan museum video sequences at https://www.youtube.com/watch?v=gb8dIY-UiTg&t=2s
 
