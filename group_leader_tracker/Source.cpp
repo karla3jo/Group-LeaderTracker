@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////
-////			GROUP LEADER DETECTOR AND TRACKER by KARLA TREJO					////
-////																				////
-////	National Insitute of Informatics - Universitat Politècnica de Catalunya		////
-////						July, 2016. Tokyo, Japan.								////
-////																				////
+////			GROUP LEADER DETECTOR AND TRACKER by KARLA TREJO	    ////
+////										    ////
+////	National Insitute of Informatics - Universitat PolitÃ¨cnica de Catalunya	    ////
+////		            July, 2016. Tokyo, Japan.				    ////
+////										    ////
 ////////////////////////////////////////////////////////////////////////////////////////
 
 #include "opencv2/imgproc/imgproc.hpp"
@@ -31,11 +31,9 @@
 
 #include <chrono>  // for high_resolution_clock
 
-
 using namespace cv;
 using namespace std;
 using namespace dlib;
-
 
 // Simple 2D vector class
 struct Vec2D
@@ -107,7 +105,7 @@ int main(int argc, char* argv[])
 	cv::Mat d1, d2, motion;
 	cv::Mat result;
 	int number_of_changes = 0;
-	int	number_of_sequence = 0;
+	int number_of_sequence = 0;
 	cv::Rect rectan;
 	cv::Scalar mean_, color(0, 255, 255); //yellow
 
@@ -242,9 +240,6 @@ int main(int argc, char* argv[])
 				distances[2][i] = r.x;
 				distances[3][i] = r.y;
 			}
-
-			/*std::printf("vector_x=%d\n", r.x);
-			std::printf("vector_y=%d\n", r.y);*/
 
 			mat_i = 0;
 
@@ -410,7 +405,6 @@ int main(int argc, char* argv[])
 				}
 			}
 
-
 			// If a lot of changes happened, we assume something changed.
 			if (number_of_changes >= there_is_motion)
 			{
@@ -437,24 +431,11 @@ int main(int argc, char* argv[])
 
 			char text[255];
 			std::sprintf(text, "%d,%d", r.x, r.y);
-
-			//std::printf("le=%d\n", le);
-			//std::printf("bo=%d\n", bo);
-			//std::printf("ri=%d\n", ri);
-			/*std::printf("r_x=%d\n", r.x);
-			std::printf("r_y=%d\n", r.y);
-			std::printf("r_yh=%d\n", cvRound(r.y + r.height));
-			std::printf("r_xw=%d\n", cvRound(r.x + r.width));*/
-
+			
 			b.x.min = r.x;
 			b.y.min = r.y;
 			b.y.max = cvRound(r.y + r.height);
 			b.x.max = cvRound(r.x + r.width);
-
-			/*std::printf("b.x.min=%d\n", b.x.min);
-			std::printf("b.y.min=%d\n", b.y.min);
-			std::printf("b.y.max=%d\n", b.y.max);
-			std::printf("b.x.max=%d\n", b.x.max);*/
 
 			if (le == 0 && to == 0 && ri == 0 && bo == 0) //If there's no Movement rectangle but there is a Detection bounding box, people is just marked as "Detected"
 			{
@@ -527,11 +508,6 @@ int main(int argc, char* argv[])
 									c.y.max = cvRound(r.y + r.height);
 									c.x.max = cvRound(r.x + r.width);
 
-									/*std::printf("c.x.min=%d\n", c.x.min);
-									std::printf("c.y.min=%d\n", c.y.min);
-									std::printf("c.y.max=%d\n", c.y.max);
-									std::printf("c.x.max=%d\n", c.x.max);*/
-
 									//If it does, it means this detection is a "True Group Member" but it was complex to spot it in the first place
 									if (r.x != distances[2][m] && BoxesIntersect(b, c) == true) 
 										flag_true_member = 1;
@@ -552,9 +528,6 @@ int main(int argc, char* argv[])
 								{
 									auto pos = it - myvector.begin();
 									int result = abs(distances[2][pos] - distances[2][m]);
-									//std::printf("pos=%d\n", pos);
-									//std::printf("m=%d\n", m);
-									//std::printf("result=%d\n", result);
 
 									//If this detection do not intersect with any other but the bounding boxes are close enough, it is considered a true group member as well
 									if (abs(distances[2][pos] - distances[2][m]) < 70) //< 10) 
@@ -578,8 +551,6 @@ int main(int argc, char* argv[])
 												if (distances[2][n] == r.x)
 												{
 													rightc[n] = cvRound(r.x + r.width);
-													//std::printf("right_corner=%d\n", rightc[n]);
-													//std::printf("n=%d\n", n);
 												}
 											}
 
@@ -587,13 +558,6 @@ int main(int argc, char* argv[])
 										}
 
 										n = 0;
-										/*std::printf("m=%d\n", m);
-
-										std::printf("Right Corners Vector\n");
-										for (int i = 0; i < 15; i++) {
-											std::printf("%d ", rightc[i]);
-											std::printf("\n");
-										}*/
 
 										//Check if the left and right corners of Detection bounding boxes are close enough (100 pixels apart as maximum). If this is TRUE and the detection has
 										//NO tag assigned yet, means we have a Potential Group Member = 4.
@@ -601,25 +565,12 @@ int main(int argc, char* argv[])
 										{
 											if ((m!=n && (abs(distances[2][m] - rightc[n]) < 5)) || (m!=n && (abs(rightc[m] - distances[2][n]) < 5)))
 											{
-												//hola = abs(distances[2][m] - rightc[n]);
-												//hola2 = abs(rightc[m] - distances[2][n]);
-
-												//std::printf("hola=%d\n", hola);
-												//std::printf("hola2=%d\n", hola2);
-
 												flag_true_member = 1;
-												//distances[4][m] = 1; //is a group member
-												//flag_hc = 1;
 											}
 
 											n = n + 1;
 										}
-
-										//if (flag_hc != 1)
-										//	distances[4][m] = 2; //non-group member
 								}
-
-								//std::printf("ftm=%d\n", flag_true_member);
 
 								//If the "True Group Member" flag was activated, tag the detection as Group Member = 1, else, this detection is a Non-Member = 2
 								if (flag_true_member == 1) 
@@ -634,7 +585,7 @@ int main(int argc, char* argv[])
 								flag_true_member = 0;
 							}
 
-							//ARREGLAR AQUI!!
+							//TO DO:
 							//When the detection has NO Category tag, but we are having a Hard Case situation...
 							//int n = 0;
 							//int flag_hc = 0;
@@ -735,11 +686,6 @@ int main(int argc, char* argv[])
 						myROI_prev.y = myROI_prev.y - diff_h;
 					}
 
-					//std::printf("roiPREV_x=%d\n", myROI_prev.x);
-					//std::printf("roiPREV_y=%d\n", myROI_prev.y);
-					//std::printf("roiPREV_width=%d\n", myROI_prev.width);
-					//std::printf("roiPREV_height=%d\n", myROI_prev.height);
-
 					img(myROI_prev).copyTo(prevgray);
 
 					cv::cvtColor(prevgray, prevgray, COLOR_BGR2GRAY);
@@ -753,7 +699,6 @@ int main(int argc, char* argv[])
 				}
 
 				//Printing Detection bounding boxes with their corresponding Roles given by Category tags (1 & 2)
-				
 				std::printf("distances[4][id_member]=%d\n", distances[4][id_member]);
 
 				if (distances[4][id_member] == 1)
@@ -855,7 +800,6 @@ int main(int argc, char* argv[])
 					}
 			}
 
-			//std::printf("num_seq=%d\n", number_of_sequence);
 			m = 0;
 
 			//Identifying and storing the right corners of all Detection bounding boxes
@@ -876,8 +820,6 @@ int main(int argc, char* argv[])
 						if (distances[2][m] == r.x)
 						{
 							rightc[m] = cvRound(r.x + r.width); 
-							//std::printf("right_corner=%d\n", detections[m]);
-							//std::printf("m=%d\n", m);
 						}
 					}
 
@@ -932,11 +874,6 @@ int main(int argc, char* argv[])
 
 			cv::Rect myROI(left, top, leader_width, leader_height);
 
-			/*std::printf("left=%d\n", left);
-			std::printf("top=%d\n", top);
-			std::printf("width=%d\n", cvRound(rect.width()));
-			std::printf("height=%d\n", cvRound(rect.height()));*/
-
 			if (myROI.x < 0)
 				myROI.x = 1;
 
@@ -955,20 +892,12 @@ int main(int argc, char* argv[])
 				myROI.y = myROI.y - diff_h;
 			}
 
-			//std::printf("roi_x=%d\n", myROI.x);
-			//std::printf("roi_y=%d\n", myROI.y);
-			//std::printf("roi_w=%d\n", myROI.width);
-			//std::printf("roi_h=%d\n", myROI.height);
-
 			img(myROI).copyTo(croppedImage);
 
 			cv::cvtColor(croppedImage, croppedImage, COLOR_BGR2GRAY);
 
 			int center_roi_x = left + cvRound(rect.width() / 2);
 			int center_roi_y = top + cvRound(rect.height() / 2);
-
-			//std::printf("center_roi_x=%d\n", center_roi_x);
-			//std::printf("center_roi_y=%d\n", center_roi_y);
 
 			cv::calcOpticalFlowFarneback(prevgray, croppedImage, flow, 0.4, 1, 12, 2, 8, 1.2, 0);
 
@@ -977,13 +906,7 @@ int main(int argc, char* argv[])
 			int center_x = cvRound(leader_width / 2);
 			int center_y = cvRound(leader_height / 2);
 
-			//std::printf("center_x=%d\n", center_x);
-			//std::printf("center_y=%d\n", center_y);
-
 			const cv::Point2f& fxy = cflow.at<cv::Point2f>(center_y, center_x) * 10;
-
-			//std::printf("fxy_x=%f\n", fxy.x);
-			//std::printf("fxy_y=%f\n", fxy.y);
 
 			opt_flows[0][0] = opt_flows[0][0] + fxy.x;
 			opt_flows[1][0] = opt_flows[1][0] + fxy.y;
@@ -1009,9 +932,6 @@ int main(int argc, char* argv[])
 			{
 				int avr_x = cvRound((opt_flows[0][0] / 25) * 10);
 				int avr_y = cvRound((opt_flows[1][0] / 25) * 10);
-
-				//std::printf("avr_x=%d\n", avr_x);
-				//std::printf("avr_y=%d\n", avr_y);
 
 				cv::arrowedLine(cpy_img, cv::Point(center_roi_x, center_roi_y), cv::Point(cvRound(center_roi_x + avr_x), cvRound(center_roi_y + avr_y)), Scalar(255, 0, 0), 2, 8, 0, 0.1);
 			}
