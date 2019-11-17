@@ -1,4 +1,4 @@
-# Traking Group-Leader social interactions
+# Tracking Group-Leader social interactions
 Released code for the paper "Towards robots reasoning about group behavior of museum visitors: Leader detection and group tracking".
 https://content.iospress.com/articles/journal-of-ambient-intelligence-and-smart-environments/ais467
 
