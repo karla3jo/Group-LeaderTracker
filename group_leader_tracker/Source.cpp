@@ -118,11 +118,9 @@ int main(int argc, char* argv[])
 
 	//Ground truth
 	/*stringstream ss;
-
 	string name = "frm_";
 	string name_motion = "motion_";
 	string type = ".jpg";
-
 	int muestra = 0;
 	int c_muestra = 0;
 	int d_muestra = 0;*/
@@ -223,7 +221,6 @@ int main(int argc, char* argv[])
 			// so we slightly shrink the rectangles to get a nicer output.
 			r.x += cvRound(r.width*0.1);
 			std::printf("r_x=%d\n", r.x);
-			//r.width = cvRound(r.width*0.8);
 			r.width = cvRound(r.width*0.7);
 			r.y += cvRound(r.height*0.07);
 			std::printf("r_y=%d\n", r.y);
@@ -293,7 +290,7 @@ int main(int argc, char* argv[])
 				}
 				else
 				{
-					if ((compare_x > 40)) //&& ((abs(r.y - distances[3][save_loc_2])) > 25))
+					if ((compare_x > 40))
 					{
 						jj = 0;
 						while (distances[2][jj] != 0)
@@ -331,26 +328,20 @@ int main(int argc, char* argv[])
 
 			//To obtain images of the calc differences between images 
 			/*ss << name_motion << (d_muestra) << type;
-
 			string filename = ss.str();
 			ss.str("");
-
 			imwrite(filename, d1);
 			d_muestra = d_muestra + 1;
-
+			
 			ss << name_motion << (d_muestra) << type;
-
 			filename = ss.str();
 			ss.str("");
-
 			imwrite(filename, d2);
 			d_muestra = d_muestra + 1;
-
+			
 			ss << name_motion << (d_muestra) << type;
-
 			filename = ss.str();
 			ss.str("");
-
 			imwrite(filename, motion);
 			d_muestra = d_muestra + 1;*/
 
@@ -424,7 +415,6 @@ int main(int argc, char* argv[])
 			cv::Rect r = found_filtered[i];
 
 			r.x += cvRound(r.width*0.1);
-			//r.width = cvRound(r.width*0.8);
 			r.width = cvRound(r.width*0.7);
 			r.y += cvRound(r.height*0.07);
 			r.height = cvRound(r.height*0.8);
@@ -491,14 +481,13 @@ int main(int argc, char* argv[])
 						if (r.x == distances[2][m]) //but there is a corresponding previous detection for that bounding box
 						{
 							//If it has NO Category tag and there is NO Hard Case, check if this rectandgle intersects with any other Detection bounding box
-							if (distances[4][m] == 0 || distances[4][m] == 4) //&& flag_forced == 0) 
+							if (distances[4][m] == 0 || distances[4][m] == 4)
 							{
 								for (ii = 0; ii < found_filtered.size(); ii++)
 								{
 									cv::Rect r = found_filtered[ii];
 
 									r.x += cvRound(r.width*0.1);
-									//r.width = cvRound(r.width*0.8);
 									r.width = cvRound(r.width*0.7);
 									r.y += cvRound(r.height*0.07);
 									r.height = cvRound(r.height*0.8);
@@ -584,71 +573,6 @@ int main(int argc, char* argv[])
 
 								flag_true_member = 0;
 							}
-
-							//TO DO:
-							//When the detection has NO Category tag, but we are having a Hard Case situation...
-							//int n = 0;
-							//int flag_hc = 0;
-							//int hola = 0;
-							//int hola2 = 0;
-
-							//if (distances[4][m] == 0 && flag_forced == 1) 
-							//{
-							//	while (distances[2][n] != 0)
-							//	{
-							//		for (i = 0; i < found_filtered.size(); i++)
-							//		{
-							//			cv::Rect r = found_filtered[i];
-
-							//			r.x += cvRound(r.width*0.1);
-							//			r.width = cvRound(r.width*0.8);
-							//			r.y += cvRound(r.height*0.07);
-							//			r.height = cvRound(r.height*0.8);
-
-							//			if (distances[2][n] == r.x)
-							//			{
-							//				rightc[n] = cvRound(r.x + r.width);
-							//				std::printf("right_corner=%d\n", rightc[n]);
-							//				std::printf("n=%d\n", n);
-							//			}
-							//		}
-
-							//		n = n + 1;
-							//	}
-
-							//	n = 0;
-							//	std::printf("m=%d\n", m);
-
-							//	std::printf("Right Corners Vector\n");
-							//	for (int i = 0; i < 15; i++) {
-							//		std::printf("%d ", rightc[i]);
-							//		std::printf("\n");
-							//	}
-
-							//	//Check if the left and right corners of Detection bounding boxes are close enough (100 pixels apart as maximum). If this is TRUE and the detection has
-							//	//NO tag assigned yet, means we have a Potential Group Member = 4.
-							//	while (distances[2][n] != 0)
-							//	{
-							//		if ((m!=n && (abs(distances[2][m] - rightc[n]) < 5)) || (m!=n && (abs(rightc[m] - distances[2][n]) < 5)))
-							//		{
-							//			hola = abs(distances[2][m] - rightc[n]);
-							//			hola2 = abs(rightc[m] - distances[2][n]);
-
-							//			std::printf("hola=%d\n", hola);
-							//			std::printf("hola2=%d\n", hola2);
-
-							//			distances[4][m] = 1; //is a group member
-							//			flag_hc = 1;
-							//		}
-
-							//		n = n + 1;
-							//	}
-
-							//	if (flag_hc != 1)
-							//		distances[4][m] = 2; //non-group member
-
-							//	//distances[4][m] = 1; //HARD CASE = All humans detected on the scene -besides the leader- will be treated as Group Members = 1
-							//}
 
 							id_member = m;
 						}
@@ -810,7 +734,6 @@ int main(int argc, char* argv[])
 						cv::Rect r = found_filtered[i];
 
 						r.x += cvRound(r.width*0.1);
-						//r.width = cvRound(r.width*0.8);
 						r.width = cvRound(r.width*0.7);
 						r.y += cvRound(r.height*0.07);
 						r.height = cvRound(r.height*0.8);
@@ -850,7 +773,7 @@ int main(int argc, char* argv[])
 		std::printf("detections=%d\n", found_filtered.size());
 
 		//If there is NO detections, there is NO one to track
-		if ((found_filtered.size() == 0)) //|| (found_filtered.size() <= id_leader)) 
+		if ((found_filtered.size() == 0)) 
 		{
 			flag_track = 0;
 		}
@@ -944,12 +867,9 @@ int main(int argc, char* argv[])
 		if (muestra == 0)
 		{
 			c_muestra = c_muestra + 1;
-
 			ss << name << (c_muestra) << type;
-
 			string filename = ss.str();
 			ss.str("");
-
 			imwrite(filename, cpy_img);
 		}*/
 
