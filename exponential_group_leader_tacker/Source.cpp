@@ -33,7 +33,6 @@ using namespace cv;
 using namespace std;
 using namespace dlib;
 
-
 // Simple 2D vector class
 struct Vec2D
 {
@@ -120,11 +119,9 @@ int main(int argc, char* argv[])
 
 	//Ground truth
 	/*stringstream ss;
-
 	string name = "frm_";
 	////string name_motion = "motion_";
 	string type = ".jpg";
-
 	int muestra = 0;
 	int c_muestra = 0;
 	////int d_muestra = 0;*/
@@ -225,7 +222,6 @@ int main(int argc, char* argv[])
 			// so we slightly shrink the rectangles to get a nicer output.
 			r.x += cvRound(r.width*0.1);
 			std::printf("r_x=%d\n", r.x);
-			//r.width = cvRound(r.width*0.8);
 			r.width = cvRound(r.width*0.7);
 			r.y += cvRound(r.height*0.07);
 			std::printf("r_y=%d\n", r.y);
@@ -275,7 +271,7 @@ int main(int argc, char* argv[])
 						save_loc_2 = mat_i;
 
 						mat_i = mat_i + 1; //we move to the next X coordinate on the previous image to keep comparing
-						d = d + 1;		   //flag for first detection comparisson performed
+						d = d + 1;         //flag for first detection comparisson performed
 					}
 					else //no first detections comparisson?
 					{
@@ -328,7 +324,7 @@ int main(int argc, char* argv[])
 				}
 				else
 				{
-					if ((compare_x > 40)) //&& ((abs(r.y - distances[3][save_loc_2])) > 25))
+					if ((compare_x > 40))
 					{
 						jj = 0;
 						while (distances[2][jj] != 0)
@@ -384,26 +380,20 @@ int main(int argc, char* argv[])
 
 			//To obtain images of the calc differences between images 
 			/*ss << name_motion << (d_muestra) << type;
-
 			string filename = ss.str();
 			ss.str("");
-
 			imwrite(filename, d1);
 			d_muestra = d_muestra + 1;
 
 			ss << name_motion << (d_muestra) << type;
-
 			filename = ss.str();
 			ss.str("");
-
 			imwrite(filename, d2);
 			d_muestra = d_muestra + 1;
 
 			ss << name_motion << (d_muestra) << type;
-
 			filename = ss.str();
 			ss.str("");
-
 			imwrite(filename, motion);
 			d_muestra = d_muestra + 1;*/
 
@@ -480,7 +470,6 @@ int main(int argc, char* argv[])
 			cv::Rect r = found_filtered[i];
 
 			r.x += cvRound(r.width*0.1);
-			//r.width = cvRound(r.width*0.8);
 			r.width = cvRound(r.width*0.7);
 			r.y += cvRound(r.height*0.07);
 			r.height = cvRound(r.height*0.8);
@@ -570,7 +559,6 @@ int main(int argc, char* argv[])
 									cv::Rect r = found_filtered[ii];
 
 									r.x += cvRound(r.width*0.1);
-									//r.width = cvRound(r.width*0.8);
 									r.width = cvRound(r.width*0.7);
 									r.y += cvRound(r.height*0.07);
 									r.height = cvRound(r.height*0.8);
@@ -590,7 +578,7 @@ int main(int argc, char* argv[])
 								int myints[15] = { 0 };
 								int r = 0;
 
-								for (jj = 0; jj < 15; jj++)//found_filtered.size(); jj++)
+								for (jj = 0; jj < 15; jj++)
 								{
 									myints[jj] = distances[6][jj];
 								}
@@ -608,7 +596,7 @@ int main(int argc, char* argv[])
 									std::printf("result=%d\n", result);
 
 									//If this detection do not intersect with any other but the bounding boxes are close enough, it is considered a true group member as well
-									if (result < 80) //(abs(distances[2][pos] - distances[2][m]) < 10)
+									if (result < 80)
 									{
 										flag_true_member = 1;
 									}
@@ -724,7 +712,7 @@ int main(int argc, char* argv[])
 
 			int g_members[15] = { 0 };
 
-			for (jj = 0; jj < 15; jj++)//found_filtered.size(); jj++)
+			for (jj = 0; jj < 15; jj++)
 			{
 				g_members[jj] = distances[5][jj];
 			}
@@ -739,7 +727,7 @@ int main(int argc, char* argv[])
 
 			int h_members[15] = { 0 };
 
-			for (jj = 0; jj < 15; jj++)//found_filtered.size(); jj++)
+			for (jj = 0; jj < 15; jj++)
 			{
 				h_members[jj] = distances[6][jj];
 			}
@@ -855,7 +843,6 @@ int main(int argc, char* argv[])
 					dlib::array2d<dlib::rgb_pixel> cimg;
 					dlib::assign_image(cimg, dlib::cv_image<dlib::bgr_pixel>(img));
 
-					//tracker.start_track(cimg, dlib::centered_rect(dlib::point(new_center_x, new_center_y), r.width, r.height)); //Leader tracking starts!
 					tracker.start_track(cimg, dlib::centered_rect(dlib::point(new_center_x, new_center_y), leader_width, leader_height)); //Leader tracking starts!
 
 					flag_track = 1;
@@ -950,7 +937,7 @@ int main(int argc, char* argv[])
 			m = 0;
 
 			//Identifying and storing the right corners of all Detection bounding boxes
-			if (number_of_sequence == 0 && distances[2][m] != 0) //unch == 1 && distances[4][m] == 0 &&)
+			if (number_of_sequence == 0 && distances[2][m] != 0)
 			{
 				while (distances[2][m] != 0)
 				{
@@ -959,7 +946,6 @@ int main(int argc, char* argv[])
 						cv::Rect r = found_filtered[i];
 
 						r.x += cvRound(r.width*0.1);
-						//r.width = cvRound(r.width*0.8);
 						r.width = cvRound(r.width*0.7);
 						r.y += cvRound(r.height*0.07);
 						r.height = cvRound(r.height*0.8);
@@ -981,7 +967,6 @@ int main(int argc, char* argv[])
 				{
 					if ((abs(distances[2][m] - rightc[m + 1]) < 150 && distances[4][m] == 0) || (abs(rightc[m] - distances[2][m + 1]) < 150 && distances[4][m] == 0))
 					{
-						//distances[4][m] = 4; //is a potential group member
 						distances[8][m] = distances[8][m] + 1;
 						std::printf("RC closeness (P)=%d\n", distances[8][m]);
 					}
@@ -1001,7 +986,7 @@ int main(int argc, char* argv[])
 		std::printf("detections=%d\n", found_filtered.size());
 
 		//If there is NO detections, there is NO one to track
-		if ((found_filtered.size() == 0)) //|| (found_filtered.size() <= id_leader)) 
+		if ((found_filtered.size() == 0))
 		{
 			flag_track = 0;
 		}
@@ -1095,12 +1080,9 @@ int main(int argc, char* argv[])
 		if (muestra == 0)
 		{
 		c_muestra = c_muestra + 1;
-
 		ss << name << (c_muestra) << type;
-
 		string filename = ss.str();
 		ss.str("");
-
 		imwrite(filename, cpy_img);
 		}*/
 
