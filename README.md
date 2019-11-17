@@ -14,11 +14,11 @@ Trejo, K., Angulo, C., Satoh, S. I., & Bono, M. (2018). Towards robots reasoning
 - An input video sequence (.avi file)
 
 ## How to use
-Just run the .exe file at from the directory of any version (*group_leader_traker* or *exponential_group_leader_traker*) in command line as: **chosen_version.exe path_to_your_video_file.avi**
+Just run the .exe file from the directory of any version (*group_leader_traker* or *exponential_group_leader_traker*) in command line as: **chosen_version.exe path_to_your_video_file.avi**
 
-If you want to edit any of the source code, add the desired version of *Source.cpp* file to a Visual Studio project with the corresponding .prop files --for OpenCV and DLib-- to your project path by importing the contents of *libraries* directory.
+If you want to edit any of the source code, add the desired version of *Source.cpp* file to a Visual Studio project with the corresponding .prop files --for OpenCV and DLib-- to your project path by importing the contents of *libraries* directory. Remember to add the paths to DLib and OpenCV to your project environment as well. 
 
-In case you are willing to prepare ground truth to validate your experiments, just remember to uncomment the corresponding section in the source files of group_leader_traker and exponential_group_leader_traker. Adapt the frame sampling rate to your own needs.
+In case you are willing to prepare ground truth to validate your experiments, uncomment the corresponding section in the source files of group_leader_traker and exponential_group_leader_traker. Adapt the frame sampling rate to your own needs.
 
 We cannot provide the image-video datasets from our paper. However, you can still watch the algorithm in action for the Miraikan museum video sequences at https://www.youtube.com/watch?v=gb8dIY-UiTg&t=2s
 
