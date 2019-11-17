@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////
-////			GROUP LEADER DETECTOR AND TRACKER by KARLA TREJO					////
-////																				////
-////	National Insitute of Informatics - Universitat Politècnica de Catalunya		////
-////						July, 2016. Tokyo, Japan.								////
-////																				////
+////		    GROUP LEADER DETECTOR AND TRACKER by KARLA TREJO	            ////
+////										    ////
+////	National Insitute of Informatics - Universitat PolitÃ¨cnica de Catalunya	    ////
+////				July, 2016. Tokyo, Japan.			    ////
+////										    ////
 ////////////////////////////////////////////////////////////////////////////////////////
 
 #include "opencv2/imgproc/imgproc.hpp"
@@ -28,7 +28,6 @@
 #include <dlib/image_io.h>
 #include <dlib/opencv.h>
 #include <dlib/image_transforms.h>
-
 
 using namespace cv;
 using namespace std;
