@@ -9,9 +9,9 @@ Trejo, K., Angulo, C., Satoh, S. I., & Bono, M. (2018). Towards robots reasoning
 
 ## Requisites
 - OpenCV 2.4.11
-- Dlib 18.18
-- Visual Studio (C# environment)
-- An input video sequence (.avi file)
+- Dlib 18.18 (not mandatory to run the executable)
+- Visual Studio 13 (C# environment)
+- An input video sequence (.avi or .mp4 file)
 
 ## How to use
 Just run the .exe file from the directory of any version (*group_leader_traker* or *exponential_group_leader_traker*) in command line as: **chosen_version.exe path_to_your_video_file.avi**
